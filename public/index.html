@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pawsy Pet Shop - Kebutuhan Terbaik & Penuh Cinta untuk Si Anabul</title>
+  <meta name="description" content="Toko perlengkapan hewan peliharaan terlengkap, terpercaya, dan berkualitas tinggi. Makanan, mainan, grooming, hingga vitamin untuk anabul tersayang.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="logo" id="brandLogo">
+        <div class="logo-paw-icon">🐾</div>
+        <span class="logo-text">Pawsy<span class="logo-dot">.</span></span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#products" class="nav-link">Products</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="nav-btn-icon" id="cartBtn" title="Keranjang Belanja">
+          🛒
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <button class="btn btn-primary" onclick="scrollToSection('products')" id="navShopNowBtn">
+          Shop Now 🐾
+        </button>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Buka Menu Navigasi">
+          ☰
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero-section" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-tag">
+            <span>✨</span> Toko Perlengkapan Anabul Terpercaya #1
+          </div>
+          <h1 class="hero-title">
+            Semua Kebutuhan Si <span class="highlight">Anabul Tersayang</span>, Ada di Sini! 🐾
+          </h1>
+          <p class="hero-desc">
+            Dari makanan bernutrisi tinggi, mainan interaktif seru, hingga perlengkapan mandi wangi dan higienis. Rawat kebahagiaan sahabat berbulumu bersama Pawsy.
+          </p>
+          
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-lg" onclick="scrollToSection('products')">
+              🛍️ Shop Now
+            </button>
+            <button class="btn btn-secondary btn-lg" onclick="scrollToSection('promo')">
+              🎁 Lihat Promo Hari Ini
+            </button>
+          </div>
+
+          <div class="hero-trust">
+            <div class="avatar-group">
+              <div class="avatar-circle">🐕</div>
+              <div class="avatar-circle">🐈</div>
+              <div class="avatar-circle">🐇</div>
+              <div class="avatar-circle">🦮</div>
+            </div>
+            <div class="trust-text">
+              <div class="trust-stars">⭐⭐⭐⭐⭐ <strong>4.9 / 5.0</strong></div>
+              <span>Dipercaya oleh <strong>10.000+</strong> Pawrents di seluruh Indonesia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-wrapper">
+          <!-- Floating Badges -->
+          <div class="floating-badge badge-top-left">
+            <span>🩺</span> 100% Rekomendasi Vet
+          </div>
+          <div class="floating-badge badge-discount">
+            <span>🏷️</span> Hemat s/d 30%
+          </div>
+          <div class="floating-badge badge-bottom-right">
+            <span>🚚</span> Gratis Ongkir Se-Indonesia
+          </div>
+
+          <!-- Hero Main Showcase Card -->
+          <div class="hero-card-main">
+            <div class="hero-pet-illustration">
+              <svg viewBox="0 0 400 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Blob -->
+                <path d="M 50,160 Q 30,50 150,40 Q 280,30 330,120 Q 380,210 270,270 Q 140,320 60,250 Z" fill="#FEF08A" opacity="0.6" />
+                <circle cx="90" cy="90" r="16" fill="#BAE6FD" opacity="0.7"/>
+                <circle cx="320" cy="240" r="22" fill="#FECDD3" opacity="0.7"/>
+                <circle cx="340" cy="80" r="12" fill="#BBF7D0" opacity="0.7"/>
+
+                <!-- Cute Dog Character -->
+                <g transform="translate(70, 70)">
+                  <!-- Body -->
+                  <path d="M 40,110 Q 30,180 100,180 Q 170,180 160,110 Q 150,50 100,50 Q 50,50 40,110 Z" fill="#FBBF24" />
+                  <!-- Chest Patch -->
+                  <path d="M 75,100 Q 100,80 125,100 Q 130,150 100,160 Q 70,150 75,100 Z" fill="#FFFDF7" />
+                  <!-- Ears -->
+                  <path d="M 45,55 Q 15,70 25,120 Q 40,110 55,75 Z" fill="#D97706" />
+                  <path d="M 155,55 Q 185,70 175,120 Q 160,110 145,75 Z" fill="#D97706" />
+                  <!-- Eyes -->
+                  <circle cx="75" cy="85" r="7" fill="#1E293B" />
+                  <circle cx="77" cy="83" r="2.5" fill="#FFFFFF" />
+                  <circle cx="125" cy="85" r="7" fill="#1E293B" />
+                  <circle cx="127" cy="83" r="2.5" fill="#FFFFFF" />
+                  <!-- Blush -->
+                  <ellipse cx="62" cy="98" rx="7" ry="4" fill="#FDA4AF" opacity="0.8"/>
+                  <ellipse cx="138" cy="98" rx="7" ry="4" fill="#FDA4AF" opacity="0.8"/>
+                  <!-- Snout & Nose -->
+                  <ellipse cx="100" cy="102" rx="18" ry="12" fill="#FFFDF7" />
+                  <path d="M 94,96 Q 100,92 106,96 Q 100,104 94,96 Z" fill="#1E293B" />
+                  <!-- Happy Smile -->
+                  <path d="M 94,103 Q 100,112 106,103" stroke="#1E293B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <!-- Cute Collar -->
+                  <path d="M 60,135 Q 100,150 140,135" stroke="#38BDF8" stroke-width="8" fill="none" stroke-linecap="round"/>
+                  <circle cx="100" cy="148" r="7" fill="#FACC15" stroke="#EAB308" stroke-width="1.5"/>
+                </g>
+
+                <!-- Cute Cat Companion -->
+                <g transform="translate(205, 110)">
+                  <!-- Body -->
+                  <path d="M 30,80 Q 20,140 70,140 Q 120,140 110,80 Q 105,35 70,35 Q 35,35 30,80 Z" fill="#E2E8F0" />
+                  <!-- Ears -->
+                  <polygon points="38,45 25,10 60,32" fill="#CBD5E1" />
+                  <polygon points="40,40 32,18 55,32" fill="#FDA4AF" />
+                  <polygon points="102,45 115,10 80,32" fill="#CBD5E1" />
+                  <polygon points="100,40 108,18 85,32" fill="#FDA4AF" />
+                  <!-- Eyes (Happy Arcs) -->
+                  <path d="M 50,60 Q 56,52 62,60" stroke="#1E293B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <path d="M 78,60 Q 84,52 90,60" stroke="#1E293B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <!-- Nose & Whiskers -->
+                  <polygon points="68,66 72,66 70,69" fill="#FB7185" />
+                  <line x1="42" y1="67" x2="26" y2="64" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="42" y1="71" x2="26" y2="73" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="98" y1="67" x2="114" y2="64" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="98" y1="71" x2="114" y2="73" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                  <!-- Cute Bow -->
+                  <circle cx="70" cy="85" r="4" fill="#FB7185"/>
+                  <polygon points="66,85 58,80 58,90" fill="#FDA4AF"/>
+                  <polygon points="74,85 82,80 82,90" fill="#FDA4AF"/>
+                </g>
+              </svg>
+            </div>
+            <div style="font-family: 'Fredoka', cursive; font-size: 1.25rem; color: #0284C7; font-weight: 700;">
+              🐾 Sahabat Setia Si Anabul
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+              Produk segar, aman & penuh kebahagiaan
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== KEY BENEFITS RIBBON ==================== -->
+  <section class="ribbon-section">
+    <div class="container">
+      <div class="ribbon-grid">
+        <div class="ribbon-item">
+          <div class="ribbon-icon">🛡️</div>
+          <div>
+            <h4 class="ribbon-title">100% Produk Asli</h4>
+            <p class="ribbon-subtitle">Garansi keaslian & kualitas</p>
+          </div>
+        </div>
+        <div class="ribbon-item">
+          <div class="ribbon-icon">⚡</div>
+          <div>
+            <h4 class="ribbon-title">Pengiriman Kilat</h4>
+            <p class="ribbon-subtitle">Sameday & Instant Delivery</p>
+          </div>
+        </div>
+        <div class="ribbon-item">
+          <div class="ribbon-icon">🩺</div>
+          <div>
+            <h4 class="ribbon-title">Nutrisi Terbaik</h4>
+            <p class="ribbon-subtitle">Rekomendasi dokter hewan</p>
+          </div>
+        </div>
+        <div class="ribbon-item">
+          <div class="ribbon-icon">💬</div>
+          <div>
+            <h4 class="ribbon-title">Layanan Ramah</h4>
+            <p class="ribbon-subtitle">Konsultasi perawatan anabul</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRODUCTS SECTION ==================== -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-pill">🛍️ Katalog Pilihan</div>
+        <h2 class="section-title">Produk Favorit Si Anabul</h2>
+        <p class="section-desc">
+          Temukan makanan lezat, mainan seru, hingga suplemen vitamin terbaik untuk menjaga anabul selalu sehat, aktif, dan ceria.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="category-tabs">
+        <button class="cat-tab active" data-cat="all">🐾 Semua Produk</button>
+        <button class="cat-tab" data-cat="food">🍖 Makanan & Snack</button>
+        <button class="cat-tab" data-cat="toys">🎾 Mainan & Seru</button>
+        <button class="cat-tab" data-cat="grooming">🧴 Grooming & Mandi</button>
+        <button class="cat-tab" data-cat="accessories">🛏️ Aksesoris & Kasur</button>
+        <button class="cat-tab" data-cat="health">💊 Vitamin & Sehat</button>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROMO & FLASH SALE BANNER ==================== -->
+  <section class="container" id="promo">
+    <div class="promo-banner">
+      <div class="promo-content">
+        <div>
+          <div class="promo-badge">🔥 Promo Spesial Minggu Ini</div>
+          <h2 class="promo-title">Diskon Ekstra 20% untuk Semua Pawrents Baru!</h2>
+          <p class="promo-desc">
+            Gunakan kode kupon di bawah ini saat checkout untuk mendapatkan potongan harga spesial + bonus snack treat gratis untuk anabul kesayangan.
+          </p>
+          <div class="coupon-box">
+            <span class="coupon-code" id="couponCode">PAWSYLOVE20</span>
+            <button class="btn btn-secondary btn-sm" id="copyCouponBtn">
+              📋 Salin Kode
+            </button>
+          </div>
+        </div>
+
+        <div class="countdown-box">
+          <h3 class="countdown-title">⏳ Berakhir Dalam:</h3>
+          <div class="timer-grid">
+            <div class="timer-unit">
+              <div class="timer-num" id="timerHours">14</div>
+              <div class="timer-label">Jam</div>
+            </div>
+            <div class="timer-unit">
+              <div class="timer-num" id="timerMins">42</div>
+              <div class="timer-label">Menit</div>
+            </div>
+            <div class="timer-unit">
+              <div class="timer-num" id="timerSecs">18</div>
+              <div class="timer-label">Detik</div>
+            </div>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.8rem;">
+            *Berlaku untuk seluruh metode pembayaran
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY CHOOSE US ==================== -->
+  <section class="section" style="background: var(--bg-cream-soft);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-pill">⭐ Kenapa Pawsy?</div>
+        <h2 class="section-title">Cinta & Perawatan Terbaik</h2>
+        <p class="section-desc">
+          Kami mengutamakan keselamatan, kesehatan, dan senyuman di wajah setiap anabul dan pemiliknya.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">🌿</div>
+          <h3 class="feature-title">Bahan Alami & Aman</h3>
+          <p class="feature-desc">Seluruh produk makanan dan grooming bebas dari bahan kimia berbahaya & 100% ramah anabul.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">🚀</div>
+          <h3 class="feature-title">Ekstra Higienis</h3>
+          <p class="feature-desc">Kemasan tersegel rapat dan higienis, menjaga kesegaran rasa pakan sampai ke mangkuk anabul.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">🩺</div>
+          <h3 class="feature-title">Konsultasi Gratis</h3>
+          <p class="feature-desc">Bingung memilih varian pakan? Tim ahli kami siap membantu memilihkan produk yang tepat.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">❤️</div>
+          <h3 class="feature-title">Peduli Shelter</h3>
+          <p class="feature-desc">Setiap 2% dari pembelianmu disalurkan langsung untuk makanan anabul terlantar di shelter lokal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT US SECTION ==================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-card">
+            <div style="font-size: 5.5rem; margin-bottom: 0.5rem;">🐾🏡✨</div>
+            <h3 style="font-size: 1.6rem; margin-bottom: 0.4rem;">Rumah Kedua Si Anabul</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+              Didirikan dari kecintaan mendalam terhadap kibasan ekor & dengkuran kucing yang menghangatkan hati.
+            </p>
+            
+            <div class="about-stats">
+              <div class="stat-item">
+                <h3>15k+</h3>
+                <p>Anabul Happy</p>
+              </div>
+              <div class="stat-item">
+                <h3>500+</h3>
+                <p>Produk Pilihan</p>
+              </div>
+              <div class="stat-item">
+                <h3>99.2%</h3>
+                <p>Pawrents Puas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <div class="section-pill">📖 Tentang Pawsy</div>
+          <h2 class="section-title">Dedikasi untuk Sahabat Berbulu Tercinta</h2>
+          <p class="hero-desc" style="max-width: 100%;">
+            Pawsy lahir dengan satu misi sederhana: memberikan akses termudah bagi para pecinta hewan untuk mendapatkan produk pakan bernutrisi, aksesoris nyaman, serta perlengkapan kesehatan berkualitas tinggi tanpa rasa khawatir.
+          </p>
+
+          <ul class="about-list">
+            <li class="about-list-item">
+              <div class="check-icon">✓</div>
+              <div><strong>Produk Teruji:</strong> Setiap makanan telah teruji klinis dan memiliki sertifikasi mutu internasional.</div>
+            </li>
+            <li class="about-list-item">
+              <div class="check-icon">✓</div>
+              <div><strong>Staf Ramah & Berpengalaman:</strong> Tim pecinta anabul yang siap menjawab segala pertanyaan perawatanmu.</div>
+            </li>
+            <li class="about-list-item">
+              <div class="check-icon">✓</div>
+              <div><strong>Kemudahan Belanja:</strong> Transaksi cepat, aman, dan pesanan sampai tepat waktu di depan pintu rumahmu.</div>
+            </li>
+          </ul>
+
+          <button class="btn btn-primary" onclick="scrollToSection('contact')">
+            🤝 Hubungi Kami & Berkonsultasi
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS SECTION ==================== -->
+  <section class="section" style="background: var(--bg-cream-soft);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-pill">💬 Kata Pawrents</div>
+        <h2 class="section-title">Cerita Bahagia Sahabat Pawsy</h2>
+        <p class="section-desc">
+          Dengarkan kisah manis dari para orang tua anabul yang telah mempercayakan kebutuhan peliharaannya kepada kami.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testi-card">
+          <p class="testi-quote">
+            “Sejak beralih ke pakan dari Pawsy, bulu Luna the Golden Retriever jadi super halus dan nggak gampang rontok. Pengirimannya selalu super cepat dan packingnya rapi banget!”
+          </p>
+          <div class="testi-author">
+            <div class="author-avatar">🐕</div>
+            <div class="author-info">
+              <h4>Sarah Amanda</h4>
+              <p>Pawrent dari Luna (Golden Retriever)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <p class="testi-quote">
+            “Kasur Marshmallow Donut dan mainan bulunya bener-bener favorit si Mochi! Tidurnya jadi pules dan manja banget. Senang banget nemu pet shop selengkap dan se-friendly ini.”
+          </p>
+          <div class="testi-author">
+            <div class="author-avatar">🐈</div>
+            <div class="author-info">
+              <h4>Dimas Prasetyo</h4>
+              <p>Pawrent dari Mochi (British Shorthair)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <p class="testi-quote">
+            “Shampoo Lavender Pawsy wangi banget dan sangat lembut di kulit sensitif Milo. Pelayanan CS-nya ramah pas tanya-tanya rekomendasi vitamin anak anjing. 10/10!”
+          </p>
+          <div class="testi-author">
+            <div class="author-avatar">🐩</div>
+            <div class="author-info">
+              <h4>Clarissa Wijaya</h4>
+              <p>Pawrent dari Milo (Toy Poodle)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT & FAQ SECTION ==================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-pill">📮 Ada Pertanyaan?</div>
+        <h2 class="section-title">Hubungi Tim Pawsy & FAQ</h2>
+        <p class="section-desc">
+          Kami siap membantu kebutuhan informasi produk, pemesanan grosir, hingga konsultasi perawatan anabul.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="contact-card">
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">💌 Kirim Pesan Cepat</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Isi formulir di bawah dan kami akan merespons dalam hitungan menit!
+          </p>
+
+          <form id="contactForm">
+            <div class="form-group">
+              <label class="form-label" for="contactName">Nama Lengkap</label>
+              <input type="text" id="contactName" class="form-input" placeholder="contoh: Jessica Putri" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactPhone">Nomor WhatsApp / Email</label>
+              <input type="text" id="contactPhone" class="form-input" placeholder="contoh: 081234567890" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="petType">Jenis Hewan Peliharaan</label>
+              <select id="petType" class="form-select">
+                <option value="dog">🐶 Anjing Kesayangan</option>
+                <option value="cat">🐱 Kucing Gemas</option>
+                <option value="rabbit">🐇 Kelinci / Hamster</option>
+                <option value="other">🐾 Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactMsg">Pesan / Pertanyaan</label>
+              <textarea id="contactMsg" class="form-textarea" placeholder="Tuliskan pertanyaan atau kebutuhan anabulmu..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              🚀 Kirim Pesan Sekarang
+            </button>
+          </form>
+
+          <div class="info-cards-row">
+            <div class="info-item">
+              <div class="info-icon">📍</div>
+              <div>
+                <h5>Lokasi Toko</h5>
+                <p>Jl. Fluffy Paw No. 88, Jaksel</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">⏰</div>
+              <div>
+                <h5>Jam Buka</h5>
+                <p>Senin - Minggu: 08.00 - 21.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">❓ Pertanyaan Sering Diajukan</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Jawaban instan untuk pertanyaan seputar belanja di Pawsy Pet Shop.
+          </p>
+
+          <div class="faq-list">
+            <div class="faq-item active">
+              <button class="faq-question" type="button">
+                Berapa lama estimasi pengiriman pesanan?
+                <span class="faq-icon">▼</span>
+              </button>
+              <div class="faq-answer">
+                Untuk area Jabodetabek tersedia layanan Instant/Sameday (1-4 jam sampai). Untuk pengiriman reguler ke seluruh kota di Indonesia berkisar antara 1 - 3 hari kerja dengan kemasan ekstra aman.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" type="button">
+                Apakah semua produk makanan dijamin original & segar?
+                <span class="faq-icon">▼</span>
+              </button>
+              <div class="faq-answer">
+                Tentu saja! Kami hanya bekerja sama langsung dengan distributor resmi terverifikasi. Semua produk makanan dipastikan memiliki masa kadaluarsa (expired date) panjang dan kemasan tersegel pabrik.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" type="button">
+                Bagaimana jika produk yang diterima rusak atau cacat?
+                <span class="faq-icon">▼</span>
+              </button>
+              <div class="faq-answer">
+                Pawsy memberikan garansi tukar barang atau pengembalian dana 100% tanpa ribet dalam waktu 3x24 jam sejak paket diterima. Cukup sertakan video unboxing saat menghubungi CS kami.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" type="button">
+                Apakah ada promo gratis ongkir?
+                <span class="faq-icon">▼</span>
+              </button>
+              <div class="faq-answer">
+                Ya! Kami menyediakan subsidi Gratis Ongkir hingga Rp 25.000 untuk setiap transaksi minimal Rp 150.000 ke seluruh wilayah Indonesia.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="logo">
+            <div class="logo-paw-icon">🐾</div>
+            <span class="logo-text">Pawsy<span class="logo-dot">.</span></span>
+          </a>
+          <p>
+            Sahabat terpercaya untuk kebahagiaan dan kesehatan anabul kesayangan di seluruh Indonesia.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" title="Instagram">📸</a>
+            <a href="#" class="social-btn" title="TikTok">🎵</a>
+            <a href="#" class="social-btn" title="WhatsApp">💬</a>
+            <a href="#" class="social-btn" title="YouTube">▶️</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Menu Cepat</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Katalog Produk</a></li>
+            <li><a href="#promo">Promo & Diskon</a></li>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#contact">Kontak & Lokasi</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kategori Populer</h4>
+          <ul class="footer-links">
+            <li><a href="#products" onclick="renderProducts('food')">Makanan Kucing & Anjing</a></li>
+            <li><a href="#products" onclick="renderProducts('toys')">Mainan Gigitan & Bulu</a></li>
+            <li><a href="#products" onclick="renderProducts('grooming')">Shampoo & Sisir Bulu</a></li>
+            <li><a href="#products" onclick="renderProducts('accessories')">Kasur Empuk Anabul</a></li>
+            <li><a href="#products" onclick="renderProducts('health')">Multivitamin & Kalsium</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Dapatkan Diskon 15%</h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 0.5rem;">
+            Daftarkan emailmu untuk tips perawatan anabul dan voucher promo eksklusif:
+          </p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" class="newsletter-input" placeholder="Masukkan email kamu..." required>
+            <button type="submit" class="btn btn-primary btn-sm">Daftar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Pawsy Pet Shop. Dibuat dengan penuh ❤️ dan kehangatan untuk semua Anabul di dunia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== EASTER EGG FLOATING BUTTON ==================== -->
+  <button class="easter-egg-btn" id="easterEggBtn" title="Klik untuk sapa si anabul!">
+    🐶 Sapa Si Anabul 🐱
+  </button>
+
+  <!-- ==================== CART SLIDE-OVER DRAWER ==================== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>🛒 Keranjang Belanja</h3>
+      <button class="btn-close-drawer" id="closeCartDrawer">✕</button>
+    </div>
+
+    <div class="cart-items-container" id="cartItemsList">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary-row">
+        <span>Subtotal Barang:</span>
+        <strong id="cartSubtotal">Rp 0</strong>
+      </div>
+      <div class="cart-summary-row" style="color: #059669;">
+        <span>Voucher Promo:</span>
+        <span>Tersedia saat checkout</span>
+      </div>
+      <div class="cart-total-row">
+        <span>Total Pembayaran:</span>
+        <span id="cartTotal" style="color: #0284C7;">Rp 0</span>
+      </div>
+      <button class="btn btn-primary" style="width: 100%; font-size: 1.05rem;" onclick="processCheckout()">
+        🐾 Proses Pesanan Sekarang
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== QUICK VIEW MODAL ==================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeQuickView()">✕</button>
+      <div id="quickViewContent">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CHECKOUT SUCCESS MODAL ==================== -->
+  <div class="modal-overlay" id="checkoutSuccessModal">
+    <div class="modal-card" style="text-align: center;">
+      <button class="modal-close" onclick="closeCheckoutModal()">✕</button>
+      <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉🐾📦</div>
+      <h3 style="font-size: 1.8rem; color: #0284C7; margin-bottom: 0.5rem;">Pesanan Berhasil Dibuat!</h3>
+      <p style="color: var(--text-body); font-size: 0.98rem; margin-bottom: 1.5rem; line-height: 1.6;">
+        Terima kasih banyak telah berbelanja di Pawsy Pet Shop. Paket kebutuhan anabulmu sedang disiapkan dengan penuh kasih sayang!
+      </p>
+      <div style="background: var(--bg-cream-soft); padding: 1rem; border-radius: var(--radius-sm); border: 1px dashed var(--cream-border); margin-bottom: 1.5rem;">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Nomor Pesanan / Resi Simulasi:</span>
+        <div style="font-family: 'Fredoka', cursive; font-size: 1.3rem; font-weight: 700; color: #B45309;" id="orderResi">PAWSY-892301</div>
+      </div>
+      <button class="btn btn-primary" style="width: 100%;" onclick="closeCheckoutModal()">
+        🐾 Lanjut Jelajahi Produk
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>
