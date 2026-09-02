@@ -336,44 +336,6 @@
       margin-top: 2px;
     }
 
-    .demo-creds {
-      background: var(--bg-cream-soft);
-      border: 1px dashed var(--cream-border);
-      border-radius: var(--radius-sm);
-      padding: 0.8rem 1rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.82rem;
-      color: var(--text-dark);
-    }
-
-    .demo-creds strong {
-      color: #0284C7;
-    }
-
-    .demo-creds-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-top: 0.3rem;
-      flex-wrap: wrap;
-    }
-
-    .demo-pill {
-      background: white;
-      padding: 0.25rem 0.6rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-light);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-family: monospace;
-      font-size: 0.8rem;
-    }
-
-    .demo-pill:hover {
-      background: var(--yellow-light);
-      border-color: var(--yellow-vibrant);
-    }
-
     .form-group {
       margin-bottom: 1.3rem;
     }
@@ -648,19 +610,6 @@
           </div>
         @endif
 
-        <!-- Quick Demo Accounts Helper -->
-        <div class="demo-creds">
-          <div><i data-lucide="sparkles" style="width:14px;height:14px;color:#F59E0B;vertical-align:middle;"></i> <strong>Kredensial Demo Cepat (Klik untuk isi otomatis):</strong></div>
-          <div class="demo-creds-row">
-            <span class="demo-pill" onclick="fillCredentials('admin@pawsy.com', 'admin123')">
-              👑 <strong>Admin:</strong> admin@pawsy.com
-            </span>
-            <span class="demo-pill" onclick="fillCredentials('user@pawsy.com', 'user123')">
-              🐾 <strong>User:</strong> user@pawsy.com
-            </span>
-          </div>
-        </div>
-
         <form action="{{ route('login.post') }}" method="POST">
           @csrf
 
@@ -722,13 +671,6 @@
         togglePasswordIcon.setAttribute('data-lucide', isPassword ? 'eye-off' : 'eye');
         lucide.createIcons();
       });
-    }
-
-    // Quick Demo Credentials Auto-Fill
-    function fillCredentials(email, password) {
-      document.getElementById('email').value = email;
-      document.getElementById('password').value = password;
-      document.getElementById('password').focus();
     }
   </script>
 </body>

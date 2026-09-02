@@ -768,6 +768,13 @@
       <button class="btn-close-drawer" id="closeCartDrawer"><i data-lucide="x"></i></button>
     </div>
 
+    @guest
+      <div style="background: var(--yellow-light); border-bottom: 1px solid var(--cream-border); padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem; font-size: 0.86rem; color: #854D0E;">
+        <i data-lucide="info" style="width: 18px; height: 18px; flex-shrink: 0; color: #D97706;"></i>
+        <span>Kamu belum masuk. Silakan <a href="{{ route('login') }}" style="color: #0284C7; font-weight: 700; text-decoration: underline;">Masuk</a> untuk berbelanja.</span>
+      </div>
+    @endguest
+
     <div class="cart-items-container" id="cartItemsList">
       <!-- Injected via JavaScript -->
     </div>
@@ -788,6 +795,31 @@
       <button class="btn btn-primary" style="width: 100%; font-size: 1.05rem;" onclick="processCheckout()">
         <i data-lucide="shopping-bag"></i> Proses Pesanan Sekarang
       </button>
+    </div>
+  </div>
+
+  <!-- ==================== AUTH REQUIRED MODAL ==================== -->
+  <div class="modal-overlay" id="authRequiredModal">
+    <div class="modal-card" style="text-align: center; max-width: 480px;">
+      <button class="modal-close" onclick="closeAuthRequiredModal()"><i data-lucide="x"></i></button>
+      <div style="width: 76px; height: 76px; background: linear-gradient(135deg, #FEF9C3, #FFE4E6); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; color: #E11D48; box-shadow: 0 8px 20px rgba(251, 113, 133, 0.25);">
+        <i data-lucide="lock" style="width: 36px; height: 36px; stroke: #E11D48;"></i>
+      </div>
+      <h3 style="font-size: 1.6rem; color: #1E293B; margin-bottom: 0.6rem;" id="authModalTitle">Yuk Masuk ke Akun Dulu! 🐾</h3>
+      <p style="color: var(--text-body); font-size: 0.95rem; margin-bottom: 1.6rem; line-height: 1.6;" id="authModalDesc">
+        Kamu perlu memiliki akun atau masuk terlebih dahulu untuk menambahkan produk pilihanmu ke keranjang belanja dan melakukan pembelian.
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <a href="{{ route('login') }}" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.05rem;" id="authModalLoginBtn">
+          <i data-lucide="log-in"></i> Masuk ke Akun
+        </a>
+        <a href="{{ route('register') }}" class="btn btn-secondary" style="width: 100%; justify-content: center; font-size: 1.02rem;" id="authModalRegisterBtn">
+          <i data-lucide="user-plus"></i> Daftar Akun Baru
+        </a>
+        <button type="button" class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 0.25rem;" onclick="closeAuthRequiredModal()">
+          Nanti Saja
+        </button>
+      </div>
     </div>
   </div>
 
@@ -821,6 +853,17 @@
       </button>
     </div>
   </div>
+
+  <!-- Auth State Configuration for JavaScript -->
+  <script>
+    window.PAWSY_AUTH = {
+      isLoggedIn: {{ Auth::check() ? 'true' : 'false' }},
+      userName: @json(Auth::check() ? Auth::user()->name : null),
+      userRole: @json(Auth::check() ? Auth::user()->role : null),
+      loginUrl: @json(route('login')),
+      registerUrl: @json(route('register'))
+    };
+  </script>
 
   <!-- Scripts -->
   <script src="{{ asset('js/main.js') }}"></script>

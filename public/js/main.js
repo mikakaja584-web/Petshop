@@ -119,25 +119,13 @@ const PRODUCTS_DATA = [
   }
 ];
 
-// 2. STATE MANAGEMENT
-let cart = JSON.parse(localStorage.getItem('pawsy_cart')) || [
-  {
-    id: 1,
-    name: "Royal Canin Mini Adult 2kg",
-    price: 185000,
-    iconName: "bone",
-    qty: 1
-  },
-  {
-    id: 3,
-    name: "Chew Bone Rubber Toy",
-    price: 45000,
-    iconName: "bone",
-    qty: 1
-  }
-];
+// 2. STATE MANAGEMENT & AUTH HELPER
+function isUserLoggedIn() {
+  return typeof window.PAWSY_AUTH !== 'undefined' && window.PAWSY_AUTH.isLoggedIn === true;
+}
 
-let wishlist = JSON.parse(localStorage.getItem('pawsy_wishlist')) || [1];
+let cart = JSON.parse(localStorage.getItem('pawsy_cart')) || [];
+let wishlist = JSON.parse(localStorage.getItem('pawsy_wishlist')) || [];
 
 // 3. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
@@ -306,6 +294,11 @@ function closeCart() {
 }
 
 function addToCart(productId) {
+  if (!isUserLoggedIn()) {
+    openAuthRequiredModal('keranjang');
+    return;
+  }
+
   const product = PRODUCTS_DATA.find(p => p.id === productId);
   if (!product) return;
 
@@ -324,7 +317,7 @@ function addToCart(productId) {
 
   saveCart();
   updateCartDisplay();
-  showToast(`"${product.name}" berhasil ditambahkan ke keranjang!`);
+  showToast(`"${product.name}" berhasil ditambahkan ke keranjang!`, 'success');
   createPawSparkle(window.innerWidth / 2, window.innerHeight / 2, 4);
 }
 
@@ -471,8 +464,13 @@ function closeQuickView() {
 
 // 9. CHECKOUT SIMULATION
 function processCheckout() {
+  if (!isUserLoggedIn()) {
+    openAuthRequiredModal('checkout');
+    return;
+  }
+
   if (cart.length === 0) {
-    showToast("Keranjang Anda masih kosong!");
+    showToast("Keranjang Anda masih kosong!", "warning");
     return;
   }
 
@@ -500,6 +498,40 @@ function processCheckout() {
 
 function closeCheckoutModal() {
   document.getElementById('checkoutSuccessModal')?.classList.remove('open');
+}
+
+// 9b. AUTH REQUIRED MODAL HANDLER
+function openAuthRequiredModal(actionType = 'keranjang') {
+  const modal = document.getElementById('authRequiredModal');
+  const titleEl = document.getElementById('authModalTitle');
+  const descEl = document.getElementById('authModalDesc');
+  const loginBtn = document.getElementById('authModalLoginBtn');
+  const registerBtn = document.getElementById('authModalRegisterBtn');
+
+  const loginUrl = window.PAWSY_AUTH?.loginUrl || '/login';
+  const registerUrl = window.PAWSY_AUTH?.registerUrl || '/register';
+
+  if (loginBtn) loginBtn.setAttribute('href', loginUrl);
+  if (registerBtn) registerBtn.setAttribute('href', registerUrl);
+
+  if (actionType === 'checkout') {
+    if (titleEl) titleEl.innerHTML = 'Yuk Masuk untuk Checkout! 🐾';
+    if (descEl) descEl.textContent = 'Kamu perlu memiliki akun atau masuk terlebih dahulu untuk memproses pesanan dan melakukan pembelian.';
+    showToast("Silakan login atau daftar akun untuk melakukan pembelian.", "warning");
+  } else {
+    if (titleEl) titleEl.innerHTML = 'Yuk Masuk ke Akun Dulu! 🐾';
+    if (descEl) descEl.textContent = 'Kamu perlu memiliki akun atau masuk terlebih dahulu untuk menambahkan produk pilihanmu ke keranjang belanja.';
+    showToast("Silakan login atau daftar akun untuk menambahkan ke keranjang.", "warning");
+  }
+
+  if (modal) {
+    modal.classList.add('open');
+    refreshLucideIcons();
+  }
+}
+
+function closeAuthRequiredModal() {
+  document.getElementById('authRequiredModal')?.classList.remove('open');
 }
 
 // 10. WISHLIST TOGGLE
@@ -645,7 +677,7 @@ function createPawSparkle(originX, originY, count = 8) {
 }
 
 // 14. TOAST NOTIFICATIONS
-function showToast(message) {
+function showToast(message, type = 'success') {
   let container = document.querySelector('.toast-container');
   if (!container) {
     container = document.createElement('div');
@@ -654,9 +686,14 @@ function showToast(message) {
   }
 
   const toast = document.createElement('div');
-  toast.className = 'toast toast-success';
+  const isWarning = type === 'warning' || type === 'error';
+  toast.className = `toast ${isWarning ? 'toast-warning' : 'toast-success'}`;
+  const iconMarkup = isWarning
+    ? '<i data-lucide="alert-circle" style="width:18px;height:18px;stroke:#F59E0B;"></i>'
+    : '<i data-lucide="check-circle" style="width:18px;height:18px;stroke:#22C55E;"></i>';
+
   toast.innerHTML = `
-    <i data-lucide="check-circle" style="width:18px;height:18px;stroke:#22C55E;"></i>
+    ${iconMarkup}
     <span>${message}</span>
   `;
 
@@ -668,7 +705,7 @@ function showToast(message) {
     toast.style.transform = 'translateY(10px) scale(0.9)';
     toast.style.transition = 'all 0.3s ease';
     setTimeout(() => toast.remove(), 300);
-  }, 3200);
+  }, 3400);
 }
 
 // 15. FORMS & COUPON CLIPBOARD

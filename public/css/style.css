@@ -2052,6 +2052,14 @@ img {
   border-left: 4px solid var(--mint-accent);
 }
 
+.toast-error {
+  border-left: 4px solid #EF4444;
+}
+
+.toast-warning {
+  border-left: 4px solid #F59E0B;
+}
+
 /* Interactive Easter Egg Floating Button */
 .easter-egg-btn {
   position: fixed;

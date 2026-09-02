@@ -43,6 +43,12 @@ class AuthController extends Controller
                     ->with('success', 'Selamat datang kembali, ' . $user->name . '! Anda masuk sebagai Admin.');
             }
 
+            // Jika ada intended URL ke area admin untuk pengguna non-admin, hapus agar tidak mental
+            $intended = session()->get('url.intended');
+            if ($intended && (str_contains($intended, '/admin') || str_contains($intended, 'admin.'))) {
+                session()->forget('url.intended');
+            }
+
             return redirect()->intended(route('home'))
                 ->with('success', 'Selamat datang kembali, ' . $user->name . '!');
         }
