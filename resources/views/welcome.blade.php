@@ -17,6 +17,31 @@
 </head>
 <body>
 
+  <!-- Flash Messages Toast Notification -->
+  @if(session('success'))
+    <div class="landing-toast-bar landing-toast-success" id="landingToast">
+      <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+      <span>{{ session('success') }}</span>
+      <button onclick="document.getElementById('landingToast').remove()"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+    </div>
+  @endif
+
+  @if(session('error'))
+    <div class="landing-toast-bar landing-toast-error" id="landingToast">
+      <i data-lucide="alert-circle" style="width: 20px; height: 20px;"></i>
+      <span>{{ session('error') }}</span>
+      <button onclick="document.getElementById('landingToast').remove()"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+    </div>
+  @endif
+
+  @if(session('info'))
+    <div class="landing-toast-bar landing-toast-info" id="landingToast">
+      <i data-lucide="info" style="width: 20px; height: 20px;"></i>
+      <span>{{ session('info') }}</span>
+      <button onclick="document.getElementById('landingToast').remove()"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+    </div>
+  @endif
+
   <!-- ==================== NAVBAR ==================== -->
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
@@ -32,6 +57,17 @@
         <li><a href="#products" class="nav-link">Products</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
+
+        <!-- Mobile-Only Auth Links -->
+        @guest
+          <li style="display: none;" class="mobile-only-link"><a href="{{ route('login') }}" class="nav-link"><i data-lucide="log-in" style="width: 16px; height: 16px; vertical-align: middle;"></i> Masuk</a></li>
+          <li style="display: none;" class="mobile-only-link"><a href="{{ route('register') }}" class="nav-link"><i data-lucide="user-plus" style="width: 16px; height: 16px; vertical-align: middle;"></i> Daftar</a></li>
+        @endguest
+        @auth
+          @if(Auth::user()->isAdmin())
+            <li style="display: none;" class="mobile-only-link"><a href="{{ route('admin.dashboard') }}" class="nav-link"><i data-lucide="shield-check" style="width: 16px; height: 16px; vertical-align: middle;"></i> Admin Dashboard</a></li>
+          @endif
+        @endauth
       </ul>
 
       <div class="nav-actions">
@@ -39,9 +75,42 @@
           <i data-lucide="shopping-cart"></i>
           <span class="cart-badge" id="cartCount">0</span>
         </button>
-        <button class="btn btn-primary" onclick="scrollToSection('products')" id="navShopNowBtn">
+
+        <button class="btn btn-primary nav-shop-btn" onclick="scrollToSection('products')" id="navShopNowBtn">
           <i data-lucide="shopping-bag"></i> Shop Now
         </button>
+
+        <!-- Authentication Buttons -->
+        @guest
+          <a href="{{ route('login') }}" class="btn-auth-nav btn-auth-login" title="Masuk ke Akun">
+            <i data-lucide="log-in"></i> Masuk
+          </a>
+          <a href="{{ route('register') }}" class="btn-auth-nav btn-auth-register" title="Daftar Akun Baru">
+            <i data-lucide="user-plus"></i> Daftar
+          </a>
+        @endguest
+
+        @auth
+          @if(Auth::user()->isAdmin())
+            <a href="{{ route('admin.dashboard') }}" class="btn-auth-nav btn-auth-admin" title="Buka Dashboard Admin">
+              <i data-lucide="shield-check"></i> Dashboard
+            </a>
+          @endif
+
+          <div class="nav-user-chip">
+            <div class="nav-user-avatar" title="{{ Auth::user()->name }}">
+              {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            </div>
+            <span class="nav-user-name" title="{{ Auth::user()->name }}">{{ Auth::user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST" style="display: inline; margin: 0;">
+              @csrf
+              <button type="submit" class="nav-logout-btn" title="Keluar dari akun">
+                <i data-lucide="log-out"></i>
+              </button>
+            </form>
+          </div>
+        @endauth
+
         <button class="mobile-toggle" id="mobileToggle" aria-label="Buka Menu Navigasi">
           <i data-lucide="menu"></i>
         </button>
