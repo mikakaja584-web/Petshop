@@ -1,9 +1,9 @@
 /**
  * PAWSY PET SHOP - JAVASCRIPT ENGINE
- * Handles Cart Management, Filtering, Modals, Easter Egg, Audio & Interactivity
+ * Handles Cart Management, Filtering, Modals, Easter Egg, Audio & Lucide Icons Integration
  */
 
-// 1. PRODUCT CATALOG DATA
+// 1. PRODUCT CATALOG DATA WITH LUCIDE ICON NAMES
 const PRODUCTS_DATA = [
   {
     id: 1,
@@ -12,11 +12,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Makanan & Snack",
     price: 185000,
     originalPrice: 220000,
-    rating: 4.9,
+    rating: 5,
     reviews: 142,
     badge: "Best Seller",
     badgeType: "best",
-    icon: "🍖",
+    iconName: "bone",
     desc: "Formula nutrisi presisi tinggi untuk anjing ras kecil usia 10 bulan ke atas. Menjaga kesehatan pencernaan, bulu berkilau, dan gigi sehat."
   },
   {
@@ -26,11 +26,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Makanan & Snack",
     price: 95000,
     originalPrice: 115000,
-    rating: 4.8,
+    rating: 5,
     reviews: 98,
     badge: "Diskon 18%",
     badgeType: "sale",
-    icon: "🐟",
+    iconName: "fish",
     desc: "Kaya akan Omega 3 & 6 dan Zinc untuk bulu sehat berkilau serta vitamin A dan Taurin untuk kesehatan mata kucing kesayangan."
   },
   {
@@ -40,11 +40,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Mainan & Aktivitas",
     price: 45000,
     originalPrice: 60000,
-    rating: 4.9,
+    rating: 5,
     reviews: 76,
     badge: "Favorit",
     badgeType: "best",
-    icon: "🦴",
+    iconName: "bone",
     desc: "Mainan gigitan karet alami 100% non-toxic dengan suara mencicit yang seru. Membantu membersihkan karang gigi anabul saat bermain."
   },
   {
@@ -54,11 +54,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Mainan & Aktivitas",
     price: 32000,
     originalPrice: 45000,
-    rating: 4.7,
+    rating: 5,
     reviews: 112,
     badge: "Cute Pick",
     badgeType: "new",
-    icon: "🪶",
+    iconName: "sparkles",
     desc: "Tongkat bulu elastis dengan lonceng kecil gemerincing. Merangsang naluri berburu kucing agar tetap aktif, lincah, dan gembira."
   },
   {
@@ -68,11 +68,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Grooming & Mandi",
     price: 78000,
     originalPrice: 95000,
-    rating: 5.0,
+    rating: 5,
     reviews: 84,
     badge: "100% Organik",
     badgeType: "new",
-    icon: "🧴",
+    iconName: "bath",
     desc: "Formula lembut tanpa SLS & Paraben dengan ekstrak Lavender dan Aloe Vera. Mencegah jamur, kutu, dan wangi tahan hingga 7 hari."
   },
   {
@@ -82,11 +82,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Grooming & Mandi",
     price: 55000,
     originalPrice: 70000,
-    rating: 4.8,
+    rating: 5,
     reviews: 65,
     badge: "Praktis",
     badgeType: "best",
-    icon: "🪮",
+    iconName: "brush",
     desc: "Sisir dengan ujung pelindung bulat lembut dan tombol self-cleaning sekali tekan untuk membuang bulu rontok tanpa melukai kulit."
   },
   {
@@ -96,11 +96,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Aksesoris & Kasur",
     price: 165000,
     originalPrice: 210000,
-    rating: 4.9,
+    rating: 5,
     reviews: 180,
     badge: "Super Empuk",
     badgeType: "best",
-    icon: "🛏️",
+    iconName: "bed",
     desc: "Kasur anabul bentuk donat dengan bulu faux fur ultra-lembut. Memberikan kenyamanan pereda kecemasan dan tidur nyenyak maksimal."
   },
   {
@@ -110,11 +110,11 @@ const PRODUCTS_DATA = [
     categoryLabel: "Kesehatan & Vitamin",
     price: 88000,
     originalPrice: 110000,
-    rating: 4.9,
+    rating: 5,
     reviews: 91,
     badge: "Rekomendasi Vet",
     badgeType: "new",
-    icon: "💊",
+    iconName: "pill",
     desc: "Suplemen lengkap dengan rasa lezat yang disukai anabul. Meningkatkan nafsu makan, daya tahan tubuh, dan kepadatan tulang."
   }
 ];
@@ -125,14 +125,14 @@ let cart = JSON.parse(localStorage.getItem('pawsy_cart')) || [
     id: 1,
     name: "Royal Canin Mini Adult 2kg",
     price: 185000,
-    icon: "🍖",
+    iconName: "bone",
     qty: 1
   },
   {
     id: 3,
     name: "Chew Bone Rubber Toy",
     price: 45000,
-    icon: "🦴",
+    iconName: "bone",
     qty: 1
   }
 ];
@@ -149,7 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initEasterEgg();
   initForms();
+  refreshLucideIcons();
 });
+
+function refreshLucideIcons() {
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
+}
 
 // 4. NAVBAR & SCROLL BEHAVIOR
 function initNavbar() {
@@ -168,18 +175,35 @@ function initNavbar() {
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
       navMenu.classList.toggle('open');
-      const icon = mobileToggle.querySelector('span') || mobileToggle;
-      icon.textContent = navMenu.classList.contains('open') ? '✕' : '☰';
+      const isOpen = navMenu.classList.contains('open');
+      mobileToggle.innerHTML = isOpen 
+        ? '<i data-lucide="x"></i>' 
+        : '<i data-lucide="menu"></i>';
+      refreshLucideIcons();
     });
 
     // Close menu when clicking nav link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
-        mobileToggle.textContent = '☰';
+        mobileToggle.innerHTML = '<i data-lucide="menu"></i>';
+        refreshLucideIcons();
       });
     });
   }
+}
+
+// Helper to render star SVGs
+function renderStarRating(count = 5) {
+  let stars = '';
+  for (let i = 0; i < 5; i++) {
+    if (i < count) {
+      stars += '<i data-lucide="star" class="star-filled"></i>';
+    } else {
+      stars += '<i data-lucide="star" class="star-outline"></i>';
+    }
+  }
+  return stars;
 }
 
 // 5. RENDER PRODUCTS
@@ -198,17 +222,19 @@ function renderProducts(category = 'all') {
         <div class="product-image-box">
           <span class="product-badge badge-${product.badgeType}">${product.badge}</span>
           <button class="btn-wishlist ${isWishlisted ? 'active' : ''}" onclick="toggleWishlist(${product.id}, this)" title="Tambah ke Wishlist">
-            ${isWishlisted ? '❤️' : '🤍'}
+            <i data-lucide="heart" style="${isWishlisted ? 'fill:#FB7185;stroke:#FB7185;' : ''}"></i>
           </button>
-          <div style="font-size: 5rem; line-height: 1; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.08));" class="product-img-svg">
-            ${product.icon}
+          <div class="product-icon-container">
+            <i data-lucide="${product.iconName}"></i>
           </div>
         </div>
         <div class="product-content">
           <span class="product-category">${product.categoryLabel}</span>
           <h3 class="product-title">${product.name}</h3>
           <div class="product-rating">
-            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+            <div class="rating-stars">
+              ${renderStarRating(product.rating)}
+            </div>
             <span class="rating-count">(${product.reviews})</span>
           </div>
           <div class="product-footer">
@@ -218,10 +244,10 @@ function renderProducts(category = 'all') {
             </div>
             <div style="display: flex; gap: 0.4rem;">
               <button class="btn btn-outline btn-sm" onclick="openQuickView(${product.id})" title="Lihat Detail">
-                Detail
+                <i data-lucide="eye"></i> Detail
               </button>
               <button class="btn-add-cart" onclick="addToCart(${product.id})" title="Tambah ke Keranjang">
-                🛒+
+                <i data-lucide="plus"></i>
               </button>
             </div>
           </div>
@@ -229,6 +255,8 @@ function renderProducts(category = 'all') {
       </div>
     `;
   }).join('');
+
+  refreshLucideIcons();
 }
 
 // 6. CATEGORY FILTER TABS
@@ -269,6 +297,7 @@ function initCartUI() {
 function openCart() {
   document.getElementById('cartDrawer')?.classList.add('open');
   document.getElementById('cartOverlay')?.classList.add('open');
+  refreshLucideIcons();
 }
 
 function closeCart() {
@@ -288,14 +317,14 @@ function addToCart(productId) {
       id: product.id,
       name: product.name,
       price: product.price,
-      icon: product.icon,
+      iconName: product.iconName,
       qty: 1
     });
   }
 
   saveCart();
   updateCartDisplay();
-  showToast(`🐾 "${product.name}" berhasil ditambahkan ke keranjang!`);
+  showToast(`"${product.name}" berhasil ditambahkan ke keranjang!`);
   createPawSparkle(window.innerWidth / 2, window.innerHeight / 2, 4);
 }
 
@@ -340,16 +369,19 @@ function updateCartDisplay() {
   if (cart.length === 0) {
     itemsContainer.innerHTML = `
       <div class="cart-empty">
-        <div class="cart-empty-icon">🐾</div>
+        <div class="cart-empty-icon">
+          <i data-lucide="shopping-bag"></i>
+        </div>
         <h4>Keranjangmu masih kosong</h4>
         <p style="font-size: 0.9rem; margin-top: 0.4rem;">Yuk pilih kebutuhan anabul kesayanganmu sekarang!</p>
         <button class="btn btn-primary btn-sm" style="margin-top: 1rem;" onclick="closeCart(); scrollToSection('products');">
-          Belanja Sekarang
+          <i data-lucide="shopping-bag"></i> Belanja Sekarang
         </button>
       </div>
     `;
     if (subtotalEl) subtotalEl.textContent = "Rp 0";
     if (totalEl) totalEl.textContent = "Rp 0";
+    refreshLucideIcons();
     return;
   }
 
@@ -359,18 +391,24 @@ function updateCartDisplay() {
     subtotal += itemTotal;
     return `
       <div class="cart-item">
-        <div class="cart-item-img">${item.icon}</div>
+        <div class="cart-item-img">
+          <i data-lucide="${item.iconName || 'bone'}"></i>
+        </div>
         <div class="cart-item-info">
           <div class="cart-item-title">${item.name}</div>
           <div class="cart-item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
           <div class="cart-qty-ctrl">
-            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)" title="Kurangi">
+              <i data-lucide="minus"></i>
+            </button>
             <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+            <button class="qty-btn" onclick="changeQty(${item.id}, 1)" title="Tambah">
+              <i data-lucide="plus"></i>
+            </button>
           </div>
         </div>
         <button class="btn-remove-item" onclick="removeFromCart(${item.id})" title="Hapus Item">
-          🗑️
+          <i data-lucide="trash-2"></i>
         </button>
       </div>
     `;
@@ -378,6 +416,7 @@ function updateCartDisplay() {
 
   if (subtotalEl) subtotalEl.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
   if (totalEl) totalEl.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+  refreshLucideIcons();
 }
 
 // 8. QUICK VIEW MODAL
@@ -391,8 +430,8 @@ function openQuickView(productId) {
 
   modalContent.innerHTML = `
     <div style="text-align: center; margin-bottom: 1.5rem;">
-      <div style="font-size: 5rem; background: var(--bg-cream-soft); width: 120px; height: 120px; border-radius: var(--radius-md); margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--cream-border);">
-        ${product.icon}
+      <div class="modal-icon-header">
+        <i data-lucide="${product.iconName}"></i>
       </div>
       <span class="product-badge badge-${product.badgeType}" style="position: static; display: inline-block; margin-top: 1rem;">${product.badge}</span>
       <h3 style="font-size: 1.5rem; margin-top: 0.5rem;">${product.name}</h3>
@@ -412,17 +451,18 @@ function openQuickView(productId) {
           Rp ${product.originalPrice.toLocaleString('id-ID')}
         </div>
       </div>
-      <div style="color: #F59E0B; font-weight: 700; font-size: 0.95rem;">
-        ⭐ ${product.rating} / 5.0 (${product.reviews} ulasan)
+      <div style="display: flex; align-items: center; gap: 0.35rem; color: #F59E0B; font-weight: 700; font-size: 0.95rem;">
+        <i data-lucide="star" class="star-filled"></i> ${product.rating}.0 (${product.reviews} ulasan)
       </div>
     </div>
 
     <button class="btn btn-primary" style="width: 100%;" onclick="addToCart(${product.id}); closeQuickView();">
-      🐾 Masukkan ke Keranjang Belanja
+      <i data-lucide="shopping-cart"></i> Masukkan ke Keranjang Belanja
     </button>
   `;
 
   modal.classList.add('open');
+  refreshLucideIcons();
 }
 
 function closeQuickView() {
@@ -455,6 +495,7 @@ function processCheckout() {
   cart = [];
   saveCart();
   updateCartDisplay();
+  refreshLucideIcons();
 }
 
 function closeCheckoutModal() {
@@ -467,16 +508,17 @@ function toggleWishlist(productId, btn) {
   if (index > -1) {
     wishlist.splice(index, 1);
     btn.classList.remove('active');
-    btn.innerHTML = '🤍';
+    btn.innerHTML = '<i data-lucide="heart"></i>';
     showToast("Dihapus dari daftar favorit.");
   } else {
     wishlist.push(productId);
     btn.classList.add('active');
-    btn.innerHTML = '❤️';
-    showToast("❤️ Ditambahkan ke daftar favorit!");
+    btn.innerHTML = '<i data-lucide="heart" style="fill:#FB7185;stroke:#FB7185;"></i>';
+    showToast("Ditambahkan ke daftar favorit!");
     playCuteTone([659.25, 880]);
   }
   localStorage.setItem('pawsy_wishlist', JSON.stringify(wishlist));
+  refreshLucideIcons();
 }
 
 // 11. FAQ ACCORDION
@@ -530,7 +572,7 @@ function initEasterEgg() {
       const rect = eggBtn.getBoundingClientRect();
       createPawSparkle(rect.left + rect.width / 2, rect.top, 12);
       playCuteTone([440, 554.37, 659.25, 880]);
-      showToast("🐶 Woof! 🐱 Meow! Si Anabul mengirim cinta untukmu! ✨");
+      showToast("Si Anabul mengirim cinta & kebahagiaan untukmu!");
     });
   }
 }
@@ -570,12 +612,18 @@ function createPawSparkle(originX, originY, count = 8) {
     document.body.appendChild(container);
   }
 
-  const icons = ['🐾', '❤️', '✨', '🦴', '⭐', '🐶', '🐱'];
+  const colors = ['#38BDF8', '#FB7185', '#FACC15', '#22C55E', '#C084FC'];
 
   for (let i = 0; i < count; i++) {
     const el = document.createElement('div');
     el.className = 'paw-particle';
-    el.textContent = icons[Math.floor(Math.random() * icons.length)];
+    const chosenColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    el.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="${chosenColor}" stroke="${chosenColor}" stroke-width="2">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    `;
     
     el.style.left = `${originX}px`;
     el.style.top = `${originY}px`;
@@ -607,9 +655,13 @@ function showToast(message) {
 
   const toast = document.createElement('div');
   toast.className = 'toast toast-success';
-  toast.innerHTML = `<span>${message}</span>`;
+  toast.innerHTML = `
+    <i data-lucide="check-circle" style="width:18px;height:18px;stroke:#22C55E;"></i>
+    <span>${message}</span>
+  `;
 
   container.appendChild(toast);
+  refreshLucideIcons();
 
   setTimeout(() => {
     toast.style.opacity = '0';
@@ -626,7 +678,7 @@ function initForms() {
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText('PAWSYLOVE20').then(() => {
-        showToast("🎉 Kode voucher 'PAWSYLOVE20' berhasil disalin!");
+        showToast("Kode voucher 'PAWSYLOVE20' berhasil disalin!");
         playCuteTone([587.33, 880]);
       });
     });
@@ -637,7 +689,7 @@ function initForms() {
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      showToast("💌 Pesanmu telah terkirim! Tim Pawsy akan segera menghubungimu.");
+      showToast("Pesanmu telah terkirim! Tim Pawsy akan segera menghubungimu.");
       contactForm.reset();
       createPawSparkle(window.innerWidth / 2, window.innerHeight / 2, 10);
     });
@@ -648,7 +700,7 @@ function initForms() {
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      showToast("🎁 Terima kasih! Voucher 15% telah dikirim ke email kamu.");
+      showToast("Terima kasih! Voucher diskon 15% telah dikirim ke email kamu.");
       newsletterForm.reset();
       createPawSparkle(window.innerWidth / 2, window.innerHeight - 100, 8);
     });
