@@ -12,8 +12,8 @@
   <!-- Lucide Icons Library (Official CDN) -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <!-- CSS & JS Assets via Vite -->
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 
@@ -865,7 +865,6 @@
     };
   </script>
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/main.js') }}"></script>
+
 </body>
 </html>
